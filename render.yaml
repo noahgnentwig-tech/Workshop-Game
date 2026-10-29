@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: parcel-pals
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: PUBLIC_DEMO
+        value: "1"
+      - key: DEMO_EPHEMERAL
+        value: "1"
+      - key: DATA_DIR
+        value: /tmp/parcel-pals

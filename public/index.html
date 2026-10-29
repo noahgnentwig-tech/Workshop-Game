@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An original, local parcel-sorting game for a student workshop.">
+  <title>Parcel Pals | Play</title>
+  <link rel="icon" href="/assets/parcel.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/game.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to game</a>
+  <header class="site-header">
+    <a class="brand" href="/"><img src="/assets/parcel.svg" alt="" width="32" height="32"> Parcel Pals</a>
+    <nav aria-label="Main navigation">
+      <a href="/" aria-current="page">Play</a>
+      <a href="/arena.html">Competitive arena</a>
+      <a href="/lab.html" data-workshop-link>Workshop lab</a>
+      <a href="/incident.html" data-workshop-link>Incident room</a>
+      <a href="/WORKSHOP.md" data-workshop-link target="_blank" rel="noopener">Workshop guide</a>
+    </nav>
+  </header>
+  <main id="main" class="game-layout">
+    <aside id="preview-banner" class="notice preview-notice" hidden>
+      <strong id="preview-label"></strong>
+      <span>This is a preview. Its events are excluded from live results.</span>
+      <a href="/">Return to the real playtest</a>
+    </aside>
+    <div id="page-message" class="notice" role="status" aria-live="polite" hidden></div>
+    <section class="hero" aria-labelledby="game-title">
+      <p class="eyebrow">Meet your crew. Find your flow.</p>
+      <h1 id="game-title">Parcel Pals</h1>
+      <p class="lede">One busy depot. Three destinations. Your next perfect delivery.</p>
+      <p id="play-mode" class="muted">Loading your local game...</p>
+      <a href="/arena.html" class="button secondary">Play PvP, levels & bosses →</a>
+    </section>
+    <section class="game-board panel" aria-label="Parcel sorting game">
+      <div class="shift-stats">
+        <div><span class="stat-label">Delivered</span><strong id="progress-label">0 / 18</strong></div>
+        <div><span class="stat-label">Time left</span><strong id="timer" role="timer" aria-live="off">45s</strong></div>
+        <div><span class="stat-label">Score</span><strong id="score">0</strong></div>
+        <div><span class="stat-label">Streak / multiplier</span><strong id="streak">0 / x1</strong></div>
+        <div><span class="stat-label">Mistakes</span><strong id="mistakes">0 / 5</strong></div>
+      </div>
+      <progress id="progress" value="0" max="18" aria-label="Parcels delivered"></progress>
+      <details id="handling-guide" class="handling-guide" open>
+        <summary>Handling guide</summary>
+        <div class="briefing">
+          <h2>Your shift</h2>
+          <p id="instructions">Loading instructions...</p>
+          <div id="worked-example" class="worked-example" hidden>
+            <img src="/assets/leaf.svg" alt="" width="32" height="32">
+            <p><strong>For example:</strong> a leaf parcel goes to the Garden. Select Garden or press <kbd>J</kbd>.</p>
+          </div>
+        </div>
+        <div class="quick-rules" aria-label="Handling rules">
+          <p><strong>1. Match</strong> Send the front parcel to its symbol's destination.</p>
+          <p id="fragile-rule"><strong>2. Wrap</strong> Fragile parcel? Press <kbd>W</kbd> to protect it first.</p>
+          <p id="express-rule"><strong>3. Rush</strong> Express parcel? Deliver before its bonus runs out.</p>
+        </div>
+      </details>
+      <section class="courier-floor" aria-label="Animated sorting depot">
+        <div class="floor-caption"><span><i aria-hidden="true"></i> PARCEL PALS DEPOT</span><strong id="crew-status">Nova is ready for the shift</strong></div>
+        <canvas id="courier-canvas" width="900" height="250" role="img" aria-label="Your courier and two teammates in the sorting depot. Deliveries are also described in the game feedback."></canvas>
+        <div class="floor-caption floor-bottom"><span id="floor-message">Small parcels. Big teamwork.</span><span id="local-best">PERSONAL BEST —</span><button id="sound-button" type="button" aria-pressed="false">Sound: off</button></div>
+      </section>
+      <div id="ready-screen" class="ready-screen">
+        <fieldset class="crew-picker">
+          <legend>Choose your courier</legend>
+          <div class="crew-options">
+            <button type="button" class="crew-card" data-courier="nova" aria-pressed="true"><span class="crew-portrait" aria-hidden="true"></span><strong>Nova</strong><small>The cool-headed captain</small></button>
+            <button type="button" class="crew-card" data-courier="bolt" aria-pressed="false"><span class="crew-portrait" aria-hidden="true"></span><strong>Bolt</strong><small>The sunshine speedster</small></button>
+            <button type="button" class="crew-card" data-courier="pip" aria-pressed="false"><span class="crew-portrait" aria-hidden="true"></span><strong>Pip</strong><small>The tiny perfectionist</small></button>
+          </div>
+          <p class="small muted">Same abilities. Different personalities. Pick your favourite.</p>
+        </fieldset>
+        <p id="shift-challenge" class="muted"></p>
+        <div class="key-guide" aria-label="Comfortable keyboard controls"><span><small>LEFT HAND</small><kbd>W</kbd> Wrap</span><span><small>RIGHT HAND · DISPATCH</small><kbd>J</kbd> Garden <kbd>K</kbd> Studio <kbd>L</kbd> Workshop</span></div>
+        <p class="small muted">A clean streak unlocks x2, x3 and x4 points. Wrong attempts cost 25 points and reset the streak.</p>
+        <button id="start-button" class="button primary" disabled>Start shift</button>
+      </div>
+      <div id="active-screen" hidden>
+        <div class="phase-banner">
+          <strong id="phase-label">Warm-up</strong>
+          <span id="phase-copy">Find your rhythm.</span>
+          <span id="points-popup" aria-hidden="true"></span>
+        </div>
+        <progress id="combo-progress" class="combo-progress" value="0" max="3" aria-label="Progress to the next multiplier"></progress>
+        <div class="conveyor">
+          <div class="parcel-desk">
+            <span id="parcel-number" class="eyebrow">Parcel 1</span>
+            <div id="parcel" class="parcel">
+              <div id="parcel-flags" class="parcel-flags"></div>
+              <img id="parcel-icon" src="/assets/leaf.svg" alt="" width="72" height="72">
+              <strong id="parcel-name"></strong>
+            </div>
+            <div id="express-meter" class="express-meter" hidden>
+              <span id="express-timer">Express bonus</span>
+              <progress id="express-progress" max="4000" value="4000" aria-label="Express bonus time remaining"></progress>
+            </div>
+            <button id="wrap-button" class="button wrap-button" aria-label="Wrap parcel, shortcut W" hidden>Wrap parcel <kbd>W</kbd></button>
+          </div>
+          <aside class="queue-panel" aria-labelledby="queue-title">
+            <h2 id="queue-title">Up next on the belt</h2>
+            <ol id="parcel-queue" class="parcel-queue"></ol>
+            <p class="small muted">Look ahead. Only the front parcel can be dispatched.</p>
+          </aside>
+          <div class="belt-track" aria-hidden="true"></div>
+        </div>
+        <p id="feedback" class="feedback" role="status" aria-live="polite">Choose a destination.</p>
+        <div id="destinations" class="destinations" aria-label="Delivery destinations"></div>
+        <div class="game-actions">
+          <button id="hint-button" class="button secondary">Ask for a hint</button>
+          <span class="hint-stat">Hints: <strong id="hint-count">0</strong></span>
+          <button id="end-button" class="button quiet">End this shift</button>
+        </div>
+      </div>
+      <section id="result-screen" class="result-screen" aria-labelledby="result-title" hidden>
+        <p class="eyebrow">Shift report</p>
+        <h2 id="result-title" tabindex="-1"></h2>
+        <div class="score-report">
+          <div><span class="stat-label">Final score</span><strong id="result-score">0</strong></div>
+          <div><span class="stat-label">Best streak</span><strong id="result-streak">0</strong></div>
+        </div>
+        <p id="result-summary"></p>
+        <p id="result-detail" class="muted"></p>
+        <p id="courier-verdict" class="courier-verdict"></p>
+        <div class="button-row">
+          <button id="again-button" class="button primary">Play another shift</button>
+          <a class="button secondary" href="/lab.html">Explore the workshop lab</a>
+        </div>
+        <p class="small muted">Replays are useful practice. Only your first round per experiment or base-config version enters the lab's comparison.</p>
+      </section>
+    </section>
+    <section class="afterword">
+      <h2>What would you change?</h2>
+      <p>Notice a confusing instruction, a missing cue, or a difficulty spike? That could be the beginning of your workshop idea.</p>
+      <p class="small muted">Rest your right hand on J, K and L to dispatch. Keep your left hand on W to wrap fragile parcels. You can press W then a dispatch key quickly; wrapping finishes first. The buttons and original 1, 2, 3 keys also work. Hints do not cost points. A random browser ID keeps playtests consistent. No names, accounts or external services.</p>
+    </section>
+  </main>
+  <footer>Original workshop demo. Runs on this computer, not a production game.</footer>
+</body>
+</html>

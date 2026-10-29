@@ -1,0 +1,9 @@
+{
+  "title": "Parcel Pals",
+  "instructions": "Match each parcel to its destination.",
+  "roundSeconds": 45,
+  "parcelCount": 8,
+  "showExample": false,
+  "showDestinationLabels": true,
+  "hintsEnabled": true
+}

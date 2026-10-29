@@ -1,0 +1,7 @@
+{
+  "id": "garden-fair",
+  "title": "Garden Fair",
+  "enabled": true,
+  "revision": 3,
+  "offerItemIds": ["fern_badge", "leaf_stamp"]
+}

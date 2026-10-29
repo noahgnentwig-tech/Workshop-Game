@@ -1,0 +1,13 @@
+{
+  "title": "Parcel Pals",
+  "instructions": "Each parcel belongs in one of the three destinations. Match its symbol and finish your delivery shift.",
+  "roundSeconds": 45,
+  "parcelCount": 18,
+  "showExample": false,
+  "showDestinationLabels": true,
+  "hintsEnabled": true,
+  "fragileParcels": true,
+  "expressParcels": true,
+  "mistakeLimit": 5,
+  "expressBonusSeconds": 4
+}

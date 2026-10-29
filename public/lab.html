@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parcel Pals | Workshop lab</title>
+  <link rel="icon" href="/assets/parcel.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/lab.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to workshop lab</a>
+  <header class="site-header">
+    <a class="brand" href="/"><img src="/assets/parcel.svg" alt="" width="32" height="32"> Parcel Pals</a>
+    <nav aria-label="Main navigation">
+      <a href="/">Play</a>
+      <a href="/lab.html" aria-current="page">Workshop lab</a>
+      <a href="/incident.html">Incident room</a>
+      <a href="/WORKSHOP.md" target="_blank" rel="noopener">Workshop guide</a>
+    </nav>
+  </header>
+  <main id="main" class="lab-layout">
+    <section class="hero">
+      <p class="eyebrow">Observe. Question. Try something.</p>
+      <h1>Your workshop lab</h1>
+      <p class="lede">Explore evidence, change the game, and turn an idea into an experiment.</p>
+    </section>
+    <div id="page-message" class="notice" role="status" aria-live="polite" hidden></div>
+    <section class="panel" aria-labelledby="synthetic-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Fictional case files</p><h2 id="synthetic-title">What would you recommend?</h2></div>
+        <span class="badge synthetic">SYNTHETIC DATA</span>
+      </div>
+      <p>These are invented historical experiments, not results from you or your classmates. Each row in a CSV is one fictional first-time player.</p>
+      <p class="small muted">These case files use the classic eight-parcel game without fragile or express handling. They practise experiment reasoning; they are not a performance benchmark for the arcade game.</p>
+      <label for="dataset">Choose a case</label>
+      <select id="dataset"></select>
+      <h3 id="dataset-name"></h3>
+      <p id="dataset-description"></p>
+      <p id="dataset-metrics" class="muted"></p>
+      <div id="synthetic-results" class="table-scroll"></div>
+      <div class="button-row"><a id="dataset-download" class="button secondary">Download fictional player CSV</a></div>
+      <p class="small muted">Completion = completed first rounds / finished first rounds. Without hints uses the same denominator. Duration includes completed and timed-out rounds. Accuracy = correct sorting attempts / all attempts.</p>
+      <p class="small muted">The 95% intervals describe uncertainty in each group's completion rate. Interval overlap alone is not a test of the difference between groups. These case files do not measure enjoyment or long-term retention.</p>
+      <div class="prompt"><strong>Discuss:</strong> What does this evidence support? What is still unknown? Would you ship, investigate, or try something else?</div>
+    </section>
+
+    <section class="panel" aria-labelledby="live-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">This computer only</p><h2 id="live-title">Your local playtests</h2></div>
+        <span class="badge live">LIVE DATA</span>
+      </div>
+      <p id="live-summary">Loading local results...</p>
+      <div id="live-results" class="table-scroll"></div>
+      <div class="button-row">
+        <button id="refresh-button" class="button secondary">Refresh lab</button>
+        <a class="button secondary" href="/api/events.csv">Download local event CSV</a>
+      </div>
+      <p class="small muted">One first round per anonymous browser per experiment (or base-config version). Pending first rounds are shown separately and excluded from finished-round rates until they end or time out. Previews and replays do not enter the comparison. This measures starters, not everyone who visits the page.</p>
+      <p class="small muted">A small classroom playtest demonstrates the workflow; it does not establish a statistically reliable winner. Familiarity with the game can affect later experiments.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="experiments-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Your next question</p><h2 id="experiments-title">Experiment proposals</h2></div>
+      </div>
+      <p>Propose a test, preview both experiences, then launch it if you are ready. One experiment can run at a time.</p>
+      <div id="experiment-list" class="experiment-list"></div>
+      <details class="form-details" open>
+        <summary>Propose a new experiment</summary>
+        <form id="experiment-form">
+          <div class="form-grid">
+            <div>
+              <label for="experiment-name">Experiment name</label>
+              <input id="experiment-name" name="name" required minlength="3" maxlength="80" placeholder="A short name for your question">
+            </div>
+            <div>
+              <label for="primary-metric">Primary metric</label>
+              <select id="primary-metric" name="primaryMetric" required></select>
+            </div>
+          </div>
+          <label for="hypothesis">What do you expect to change, and why?</label>
+          <textarea id="hypothesis" name="hypothesis" required minlength="10" maxlength="1000" rows="3" placeholder="We noticed... We believe... because..."></textarea>
+          <label for="guardrail">Guardrail: what must not get worse?</label>
+          <textarea id="guardrail" name="guardrail" required minlength="5" maxlength="500" rows="2"></textarea>
+          <label for="decision-rule">What evidence would you need? When would you stop?</label>
+          <textarea id="decision-rule" name="decisionRule" required minlength="10" maxlength="1000" rows="3" placeholder="Decide before looking at results. It is fine to need more evidence than this workshop can collect."></textarea>
+          <label for="overrides">Variant B: changed settings as JSON</label>
+          <textarea id="overrides" name="overrides" class="code-input" required rows="5" spellcheck="false" placeholder='{"showExample": true}'></textarea>
+          <p class="small muted">A uses the base settings at launch. B changes only the keys you provide. Available keys: title, instructions, roundSeconds (15-120), parcelCount (3-24), showExample, showDestinationLabels, hintsEnabled, fragileParcels, expressParcels, mistakeLimit (0-10; 0 disables the cap), expressBonusSeconds (2-10).</p>
+          <p class="small muted"><strong>Audience:</strong> all anonymous players starting a shift on this local copy while the test runs. Each browser is assigned A or B by a stable 50/50 hash. Small groups will not necessarily split evenly. Use previews to inspect variants, not repeated new identities.</p>
+          <button class="button primary" type="submit">Save proposal</button>
+        </form>
+      </details>
+    </section>
+
+    <section class="panel" aria-labelledby="settings-title">
+      <p class="eyebrow">A small change can matter</p>
+      <h2 id="settings-title">Base game settings</h2>
+      <p id="settings-note">These settings are also in config.json. Saved changes apply to new shifts, not shifts already in progress.</p>
+      <details class="form-details">
+        <summary>Edit game settings</summary>
+        <form id="config-form">
+          <fieldset id="config-fields">
+            <label for="game-title">Game title</label>
+            <input id="game-title" name="title" required maxlength="60">
+            <label for="game-instructions">Instructions</label>
+            <textarea id="game-instructions" name="instructions" required maxlength="500" rows="3"></textarea>
+            <div class="form-grid">
+              <div><label for="round-seconds">Seconds per shift</label><input id="round-seconds" name="roundSeconds" type="number" min="15" max="120" required></div>
+              <div><label for="parcel-count">Parcels per shift</label><input id="parcel-count" name="parcelCount" type="number" min="3" max="24" required></div>
+              <div><label for="mistake-limit">Mistake limit (0 = no cap)</label><input id="mistake-limit" name="mistakeLimit" type="number" min="0" max="10" required></div>
+              <div><label for="express-seconds">Express bonus window (seconds)</label><input id="express-seconds" name="expressBonusSeconds" type="number" min="2" max="10" required></div>
+            </div>
+            <label class="checkbox"><input name="fragileParcels" type="checkbox"> Introduce fragile parcels that need wrapping</label>
+            <label class="checkbox"><input name="expressParcels" type="checkbox"> Introduce express parcels with a speed bonus</label>
+            <label class="checkbox"><input name="showExample" type="checkbox"> Show a worked example</label>
+            <label class="checkbox"><input name="showDestinationLabels" type="checkbox"> Show destination names alongside symbols</label>
+            <label class="checkbox"><input name="hintsEnabled" type="checkbox"> Offer a hint button</label>
+            <button class="button primary" type="submit">Save base settings</button>
+          </fieldset>
+        </form>
+      </details>
+    </section>
+    <section class="panel reset-panel" aria-labelledby="reset-title">
+      <h2 id="reset-title">A fresh local playtest</h2>
+      <p>Clear local rounds and experiment proposals. This does not change game settings or fictional case files. Do not reset another team's work.</p>
+      <button id="reset-button" class="button danger">Reset local playtest data</button>
+    </section>
+  </main>
+  <footer>Original workshop demo. No external services, accounts, or production data.</footer>
+</body>
+</html>

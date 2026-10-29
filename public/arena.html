@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parcel Pals | Competitive Arena</title>
+  <link rel="icon" href="/assets/parcel.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/arena.css">
+  <script type="module" src="/arena.js"></script>
+</head>
+<body class="arena-body">
+  <a class="skip-link" href="#arena-main">Skip to arena</a>
+  <header class="site-header"><a class="brand" href="/"><img src="/assets/parcel.svg" alt="" width="32" height="32"> Parcel Pals <span class="arena-tag">ARENA</span></a><nav aria-label="Main navigation"><a href="/classic.html">Classic game</a><a href="/arena.html" aria-current="page">Competitive arena</a></nav></header>
+  <main id="arena-main" class="arena-layout">
+    <div class="arena-heading"><div><p class="eyebrow">Friendly faces. Fierce competition.</p><h1>The dispatch arena.</h1><p>Climb the levels. Take on the bosses. Challenge a friend.</p></div><div class="player-chip"><span id="player-portrait" aria-hidden="true"></span><div><small>YOUR CALLSIGN</small><strong id="player-name">Connecting…</strong></div></div></div>
+    <p id="arena-message" class="notice" role="status" aria-live="polite" hidden></p>
+    <p id="hosting-notice" class="notice" hidden>Free online demo: scores and player records may reset when the host sleeps, restarts or updates. An idle game may take a moment to wake up. Matches share this server.</p>
+    <div class="arena-columns">
+      <div class="arena-left">
+        <section id="arena-lobby" class="panel lobby-panel">
+          <p class="eyebrow">Choose your challenge</p><h2>Make every delivery count.</h2>
+          <div class="mode-cards"><article class="mode-card"><span class="mode-icon" aria-hidden="true">↗</span><h3>Level climb</h3><p>220 levels. Five lives. Clear each level to unlock the next, all the way to the final super boss.</p><button id="solo-start" class="button primary" disabled>Climb the levels</button></article><article class="mode-card pvp-card"><span class="mode-icon" aria-hidden="true">⚔</span><h3>Live 1 vs 1</h3><p>Same parcels. Same two-minute match clock. The higher score wins. Both players must ready up.</p><button id="room-create" class="button primary" disabled>Create PvP room</button></article></div>
+          <form id="join-form" class="join-form"><label for="room-code">Have a room code?</label><div><input id="room-code" maxlength="6" pattern="[A-Fa-f0-9]{6}" placeholder="e.g. A7B2C4" autocomplete="off" required aria-label="Room code"><button id="room-join" class="button secondary" disabled>Join room</button></div></form>
+          <div class="arena-rules"><strong>Your keyboard, comfortably split.</strong><p>Left hand: <kbd>W</kbd> wraps. Right hand: <kbd>J</kbd> Garden · <kbd>K</kbd> Studio · <kbd>L</kbd> Workshop.</p><p>Wrong bay or unwrapped fragile parcel: lose one life. A level timeout costs one life and resets that level’s points. Boss clears restore one life; super bosses restore two, up to five.</p><p class="small muted">The arena has its own results. It does not enter the workshop experiments. Callsigns are generated; no account or real name is needed.</p></div>
+        </section>
+        <section id="room-panel" class="panel room-panel" hidden>
+          <div class="section-heading"><div><p class="eyebrow">Your private duel</p><h2>Room <span id="room-display"></span></h2></div><button id="room-leave" class="button quiet">Leave room</button></div>
+          <p id="room-status" role="status" aria-live="polite"></p><div id="room-players" class="room-players"></div>
+          <div class="button-row"><button id="room-ready" class="button primary">Ready to compete</button><button id="copy-link" class="button secondary">Copy invite link</button><a id="guest-link" class="button secondary" target="_blank" rel="noopener">Open player 2 to test</a></div>
+          <p class="small muted">Both players need this same game server. The second-player button opens a separate guest identity for testing on this computer. Remote friends can join once the game is hosted online.</p>
+        </section>
+        <section id="arena-game" class="panel arena-game" hidden aria-label="Competitive sorting game">
+          <div id="opponent-strip" class="opponent-strip" hidden><strong id="duel-clock"></strong><span id="opponent-score"></span></div>
+          <div class="arena-stats"><div><small>LEVEL</small><strong id="arena-level">1</strong></div><div><small>LIVES</small><strong id="arena-lives" aria-live="polite">5 / 5</strong></div><div><small>LEVEL TIME</small><strong id="arena-timer" role="timer">27s</strong></div><div><small>SCORE</small><strong id="arena-score">0</strong></div><div><small>STREAK</small><strong id="arena-streak">0 · x1</strong></div></div>
+          <div class="courier-floor"><div class="floor-caption"><span id="arena-phase">LEVEL 1 / WARM-UP</span><button id="arena-sound" type="button" aria-pressed="false">Sound: off</button></div><canvas id="arena-canvas" width="900" height="250" role="img" aria-label="Animated courier depot; parcel details and progress appear below."></canvas></div>
+          <div id="boss-panel" class="boss-panel" hidden><svg class="boss-avatar" viewBox="0 0 90 70" aria-hidden="true"><path d="M18 20 6 4 30 13M72 20 84 4 60 13" fill="#f3b849"/><rect x="9" y="14" width="72" height="51" rx="17" fill="#66539f"/><rect x="19" y="25" width="52" height="24" rx="8" fill="#182d3c"/><path d="m28 31 10 4m24-4-10 4" stroke="#ffe695" stroke-width="5"/><path d="M30 56h30" stroke="#e8ddff" stroke-width="4"/></svg><div><strong id="boss-name">THE SORTMASTER</strong><span id="boss-copy"></span><progress id="boss-health" max="10" value="10" aria-label="Boss shield remaining"></progress></div></div>
+          <div id="play-zone"><div class="arena-parcel-row"><div id="arena-parcel" class="arena-parcel"><div id="arena-flags"></div><img id="arena-parcel-icon" src="/assets/leaf.svg" alt="" width="58" height="58"><strong id="arena-parcel-name"></strong><small id="arena-parcel-count"></small></div><div class="arena-up-next"><small>UP NEXT</small><div id="arena-next"></div><button id="arena-wrap" class="button wrap-button" aria-label="Wrap parcel, shortcut W">Wrap <kbd>W</kbd></button><small id="arena-express"></small></div></div>
+          <p id="arena-feedback" class="arena-feedback" role="status" aria-live="polite">Find your rhythm. You have got this.</p><div id="arena-destinations" class="destinations"></div><progress id="arena-progress" max="6" value="0" aria-label="Level deliveries"></progress></div>
+          <section id="arena-transition" class="arena-transition" hidden><p id="transition-kicker" class="eyebrow"></p><h2 id="transition-title" tabindex="-1"></h2><p id="transition-copy"></p><div class="button-row"><button id="arena-next-level" class="button primary">Next level</button><button id="arena-home" class="button secondary">Back to lobby</button></div></section>
+          <div class="arena-game-footer"><span class="small muted">LEFT <kbd>W</kbd> · RIGHT <kbd>J</kbd><kbd>K</kbd><kbd>L</kbd></span><button id="arena-bank" class="button quiet">Bank score & finish</button></div>
+        </section>
+        <section class="panel level-roadmap"><div class="section-heading"><div><p class="eyebrow">The road ahead · 220 levels</p><h2>A bigger climb. A bigger challenge.</h2></div><span id="campaign-progress" class="small muted">0 / 220 levels cleared</span></div><div class="map-navigation"><button id="map-previous" type="button" class="button secondary" aria-label="Previous 20 levels">←</button><label class="sr-only" for="map-range">Browse campaign levels</label><select id="map-range"></select><button id="map-next" type="button" class="button secondary" aria-label="Next 20 levels">→</button></div><div id="level-map" class="level-map" aria-label="Campaign level map"></div><p id="difficulty-copy" class="small muted">Bosses: 10, 30, 50…210. Super bosses: 20, 40, 60…220. Browse the full map; unlock each level by playing. Difficulty builds gradually, with a limit on speed and parcel counts to keep later levels playable.</p></section>
+      </div>
+      <aside class="panel leaderboard-panel" aria-label="Leaderboard"><div class="section-heading"><div><p class="eyebrow">Earn your place</p><h2>Leaderboard</h2></div><button id="board-refresh" class="button quiet">Refresh</button></div><div class="board-tabs" role="group" aria-label="Leaderboard type"><button id="board-solo" aria-pressed="true">Level climb</button><button id="board-pvp" aria-pressed="false">PvP wins</button></div><p id="board-note" class="small muted">Ranked by levels cleared, then score. Best finished run per player.</p><ol id="leaderboard" class="arena-leaderboard"></ol><p class="small muted">Shared by players on this server. Records survive a server restart. Active runs and rooms reset on restart.</p></aside>
+    </div>
+  </main><footer>Parcel Pals Arena · Original sorting competition · Your next great shift starts here.</footer>
+</body></html>

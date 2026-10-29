@@ -1,0 +1,10 @@
+{
+  "version": "catalog-3",
+  "currency": { "code": "GB", "name": "Game Bits" },
+  "items": [
+    { "id": "fern_badge", "name": "Fern badge", "description": "A leafy badge for your fictional courier.", "priceGB": 40, "icon": "/assets/leaf.svg" },
+    { "id": "leaf_stamp", "name": "Leaf stamp", "description": "A garden stamp for a pretend parcel.", "priceGB": 25, "icon": "/assets/parcel.svg" },
+    { "id": "moonlight_ribbon", "name": "Moonlight ribbon", "description": "A starry ribbon for your fictional courier.", "priceGB": 60, "icon": "/assets/star.svg" },
+    { "id": "dusk_stamp", "name": "Dusk stamp", "description": "An evening stamp for a pretend parcel.", "priceGB": 30, "icon": "/assets/bolt.svg" }
+  ]
+}

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parcel Pals | Incident room</title>
+  <link rel="icon" href="/assets/parcel.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/incident.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to incident room</a>
+  <header class="site-header">
+    <a class="brand" href="/"><img src="/assets/parcel.svg" alt="" width="32" height="32"> Parcel Pals</a>
+    <nav aria-label="Main navigation">
+      <a href="/">Play</a><a href="/lab.html">Workshop lab</a>
+      <a href="/incident.html" aria-current="page">Incident room</a>
+      <a href="/WORKSHOP.md" target="_blank" rel="noopener">Workshop guide</a>
+    </nav>
+  </header>
+  <main id="main" class="lab-layout">
+    <section class="hero">
+      <p class="eyebrow">An alert, not an answer</p>
+      <h1>GB spend is down.</h1>
+      <p class="lede">Two LiveOps events are active. What changed, who is affected, and what would you do next?</p>
+    </section>
+    <div id="page-message" class="notice" role="status" aria-live="polite" hidden></div>
+    <section class="panel" aria-labelledby="signal-title">
+      <div class="section-heading">
+        <h2 id="signal-title">The signal</h2><span class="badge synthetic">SYNTHETIC HISTORY</span>
+      </div>
+      <p>GB means <strong>Game Bits</strong>: invented in-game currency, not money. These two equal, fictional one-hour windows are a case file, not measurements of real players.</p>
+      <div id="incident-kpis" class="incident-kpis"></div>
+      <div id="history-funnel" class="table-scroll"></div>
+      <p class="small muted">Store opens, rendered offers, buyers and crashes count distinct session traces. Spend sums successful purchases. These funnels come from the same synthetic traces you can inspect below.</p>
+      <div class="prompt"><strong>Your incident brief:</strong> establish the affected scope, reproduce safely, follow the evidence, propose a mitigation or fix, then explain how you would verify recovery.</div>
+    </section>
+    <section class="panel" aria-labelledby="clients-title">
+      <div class="section-heading">
+        <h2 id="clients-title">Reproduce with an event-store client</h2><span class="badge live">LOCAL SANDBOX</span>
+      </div>
+      <p>Open either event in a separate client. Each new client gets 100 pretend GB. A failure stops that event store, not the arcade game or this investigation room.</p>
+      <div id="event-clients" class="event-clients"></div>
+    </section>
+    <section class="panel" aria-labelledby="traces-title">
+      <div class="section-heading">
+        <h2 id="traces-title">Traces and events</h2>
+        <a class="button secondary" href="/api/incident/traces.jsonl">Download incident JSONL</a>
+      </div>
+      <p>Correlate the event, config version and trace ID. Loading data successfully does not prove that the client could use it.</p>
+      <form id="trace-form">
+        <div class="form-grid trace-filters">
+          <div><label for="trace-event">LiveOps event</label><select id="trace-event"><option value="all">All events</option><option value="garden-fair">Garden Fair</option><option value="moonlight-mail">Moonlight Mail</option></select></div>
+          <div><label for="trace-source">Evidence source</label><select id="trace-source"><option value="all">All sources</option><option value="synthetic">Synthetic history</option><option value="sandbox">Local sandbox actions</option></select></div>
+          <div><label for="trace-level">Severity</label><select id="trace-level"><option value="all">All levels</option><option value="info">Info</option><option value="warn">Warning</option><option value="error">Error</option></select></div>
+        </div>
+        <label for="trace-query">Search trace ID, version, message or attributes</label>
+        <input id="trace-query" maxlength="200" placeholder="Follow one trace, or search an error or item ID">
+        <button class="button secondary" type="submit">Search traces</button>
+      </form>
+      <p id="trace-count" class="small muted"></p>
+      <div id="trace-results" class="table-scroll"></div>
+    </section>
+    <section class="panel" aria-labelledby="config-title">
+      <h2 id="config-title">Inspect and publish event config</h2>
+      <p>These are local files under <code>data/incident/events/</code>. Compare configuration with evidence before changing it. Publishing validates enabled offers and creates a new revision.</p>
+      <details class="form-details">
+        <summary>Inspect item catalog</summary>
+        <p id="catalog-version" class="small muted"></p>
+        <div id="catalog-table" class="table-scroll"></div>
+      </details>
+      <details class="form-details">
+        <summary>Open config editor</summary>
+        <form id="event-config-form">
+          <label for="config-event">Event config</label>
+          <select id="config-event"><option value="garden-fair">Garden Fair</option><option value="moonlight-mail">Moonlight Mail</option></select>
+          <p id="config-version" class="small muted"></p>
+          <label for="event-config">Released config JSON</label>
+          <textarea id="event-config" class="code-input" rows="12" spellcheck="false" required></textarea>
+          <p class="small muted">Keep id and revision unchanged; publishing increments revision automatically. Existing clients keep their snapshot. Open a new client to verify a change. Pausing an event is a mitigation, not proof that its store works.</p>
+          <button class="button primary" type="submit">Publish local config</button>
+        </form>
+      </details>
+    </section>
+    <section class="panel" aria-labelledby="sandbox-title">
+      <div class="section-heading"><h2 id="sandbox-title">Your local verification</h2><span class="badge live">SANDBOX ACTIONS</span></div>
+      <div id="sandbox-results" class="table-scroll"></div>
+      <p class="small muted">Results are separated by config version. A successful new client and a successful purchase provide local evidence; they do not rewrite the historical case or establish a real-world business recovery.</p>
+      <div class="button-row">
+        <button id="refresh-incident" class="button secondary">Refresh incident evidence</button>
+        <button id="reset-incident" class="button danger">Clear sandbox incident traces</button>
+      </div>
+    </section>
+  </main>
+  <footer>Fictional incident. Virtual currency only. Normal game rounds and A/B tests are separate.</footer>
+</body>
+</html>

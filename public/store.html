@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parcel Pals | Event store</title>
+  <link rel="icon" href="/assets/parcel.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/store.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to event store</a>
+  <header class="site-header">
+    <a class="brand" href="/"><img src="/assets/parcel.svg" alt="" width="32" height="32"> Parcel Pals</a>
+    <nav aria-label="Main navigation"><a href="/">Play</a><a href="/lab.html">Workshop lab</a><a href="/incident.html">Incident room</a></nav>
+  </header>
+  <main id="main" class="game-layout">
+    <section class="hero">
+      <p class="eyebrow">A fictional LiveOps event</p>
+      <h1 id="store-title">Opening event store...</h1>
+      <p class="lede">Small cosmetic treats for your pretend courier.</p>
+    </section>
+    <div id="page-message" class="notice" role="status" aria-live="polite" hidden></div>
+    <section class="panel" aria-labelledby="shop-title">
+      <div class="section-heading">
+        <h2 id="shop-title">Event shop</h2><span id="client-state" class="badge live" role="status">LOADING CLIENT</span>
+      </div>
+      <div class="store-wallet"><span>Sandbox balance</span><strong id="store-balance">100 GB</strong></div>
+      <p class="small muted">GB = Game Bits, an invented currency. No money, account, payment or real reward is involved. Every newly opened client starts with 100 GB.</p>
+      <div id="store-failure" class="notice" role="alert" hidden>
+        <strong id="store-failure-title">The event-store client stopped.</strong>
+        <p id="store-failure-message">The shop could not load its offers. No Game Bits were spent. Use this client's trace to investigate.</p>
+      </div>
+      <div id="store-offers" class="store-offers"></div>
+      <div class="button-row">
+        <a id="inspect-store-trace" class="button secondary" href="/incident.html">Inspect this client trace</a>
+        <button id="new-store-client" class="button primary">Open a new sandbox client</button>
+      </div>
+      <p id="store-version" class="small muted"></p>
+      <p id="store-trace" class="small muted trace-reference"></p>
+    </section>
+  </main>
+  <footer>Isolated store client. Its success or failure does not affect arcade rounds or A/B assignments.</footer>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "synthetic": true,
+  "description": "Two equal fictional one-hour observation windows. Each session represents an invented store visitor, not a real person.",
+  "windows": [
+    {
+      "id": "before",
+      "label": "12:00-13:00 UTC",
+      "startsAt": "2026-10-20T12:00:00.000Z",
+      "endsAt": "2026-10-20T13:00:00.000Z",
+      "events": [
+        { "id": "garden-fair", "title": "Garden Fair", "enabled": true, "revision": 3, "offerItemIds": ["fern_badge", "leaf_stamp"], "sessions": 24, "purchaseEvery": 3 },
+        { "id": "moonlight-mail", "title": "Moonlight Mail", "enabled": true, "revision": 7, "offerItemIds": ["moonlight_ribbon", "dusk_stamp"], "sessions": 24, "purchaseEvery": 3 }
+      ]
+    },
+    {
+      "id": "after",
+      "label": "13:00-14:00 UTC",
+      "startsAt": "2026-10-20T13:00:00.000Z",
+      "endsAt": "2026-10-20T14:00:00.000Z",
+      "events": [
+        { "id": "garden-fair", "title": "Garden Fair", "enabled": true, "revision": 3, "offerItemIds": ["fern_badge", "leaf_stamp"], "sessions": 24, "purchaseEvery": 3 },
+        { "id": "moonlight-mail", "title": "Moonlight Mail", "enabled": true, "revision": 8, "offerItemIds": ["moonlight_ribbons", "dusk_stamp"], "sessions": 24, "purchaseEvery": 3 }
+      ]
+    }
+  ]
+}

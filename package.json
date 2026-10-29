@@ -1,0 +1,22 @@
+{
+  "name": "redi-parcel-workshop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local, original browser game for a cross-functional student workshop.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js",
+    "test:browser": "playwright test",
+    "generate:data": "node scripts/generate-synthetic.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0"
+  }
+}

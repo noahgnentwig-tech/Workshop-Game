@@ -1,0 +1,32 @@
+[
+  {
+    "id": "welcome",
+    "name": "A first delivery",
+    "description": "A compares short written instructions with B, which adds a worked example. All players are fictional first-time players.",
+    "a": "Written instructions",
+    "b": "Instructions + worked example",
+    "primaryMetric": "First-round completion among starters",
+    "guardrail": "Time spent in the first round",
+    "roundSeconds": { "A": 45, "B": 45 }
+  },
+  {
+    "id": "hints",
+    "name": "A helping hand",
+    "description": "A offers a hint button. B also highlights the hint button after a wrong attempt. All players are fictional first-time players.",
+    "a": "Hint button",
+    "b": "Highlighted hint button",
+    "primaryMetric": "First-round completion among starters",
+    "guardrail": "Completion without using hints",
+    "roundSeconds": { "A": 45, "B": 45 }
+  },
+  {
+    "id": "timer",
+    "name": "A little more time",
+    "description": "A gives players 45 seconds. B gives players 75 seconds. All players are fictional first-time players.",
+    "a": "45-second shift",
+    "b": "75-second shift",
+    "primaryMetric": "First-round completion among starters",
+    "guardrail": "Round duration and player experience",
+    "roundSeconds": { "A": 45, "B": 75 }
+  }
+]

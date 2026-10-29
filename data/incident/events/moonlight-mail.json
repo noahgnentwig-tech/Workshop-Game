@@ -1,0 +1,7 @@
+{
+  "id": "moonlight-mail",
+  "title": "Moonlight Mail",
+  "enabled": true,
+  "revision": 8,
+  "offerItemIds": ["moonlight_ribbons", "dusk_stamp"]
+}

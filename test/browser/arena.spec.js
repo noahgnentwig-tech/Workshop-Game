@@ -17,6 +17,33 @@ const test = base.extend({ arena: async ({}, use) => {
 } });
 const keys = { Garden: 'j', Studio: 'k', Workshop: 'l' };
 
+test('orbital artwork loads, focus view stays playable, and leaving a run restores navigation on a phone', async ({ page, arena }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(arena.url);
+  await expect(page.getByRole('button', { name: 'Climb the levels' })).toBeEnabled();
+  await page.waitForFunction(() => document.querySelector('.future-hero-art img').naturalWidth > 0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+  await page.getByRole('button', { name: 'Climb the levels' }).click();
+  await expect(page.locator('#play-zone')).toBeVisible();
+  await page.getByRole('button', { name: 'Focus view', exact: true }).click();
+  await expect(page.locator('.arena-heading')).toBeHidden();
+  await expect(page.getByRole('button', { name: 'Exit focus view' })).toHaveAttribute('aria-pressed', 'true');
+  await page.keyboard.press(keys[await page.locator('#arena-parcel-name').textContent()]);
+  await expect(page.locator('#arena-score')).toHaveText('100');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
+  await page.getByRole('button', { name: 'Bank score & finish' }).click();
+  await page.getByRole('button', { name: 'Back to lobby' }).click();
+  await expect(page.locator('.arena-heading')).toBeVisible();
+  await expect(page.locator('.site-header')).toBeVisible();
+  await page.goto(arena.url.replace('arena.html', 'classic.html'));
+  await page.getByRole('button', { name: 'Start shift', exact: true }).click();
+  await expect(page.locator('#active-screen')).toBeVisible();
+  await page.getByRole('button', { name: 'Focus view', exact: true }).click();
+  await expect(page.locator('.site-header')).toBeHidden();
+  await page.getByRole('button', { name: 'End this shift' }).click();
+  await expect(page.locator('.site-header')).toBeVisible();
+});
+
 test('the full 220-level map repeats bosses and super bosses without unlocking unplayed levels', async ({ page, arena }) => {
   await page.goto(arena.url);
   await expect(page.getByRole('button', { name: 'Climb the levels' })).toBeEnabled();

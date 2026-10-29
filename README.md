@@ -142,6 +142,15 @@ server. This remains a small single-server teaching game, without public-scale
 matchmaking, moderation, or bot detection. It needs the previously described
 hosting, storage and access-control work before a public launch.
 
+## Orbital visual theme
+
+Both the arena and classic game use a midnight-blue, cyan and gold cockpit
+theme with original AI-generated orbital-depot artwork. Assets are served
+locally, without third-party font or image requests. The hero WebP is about
+250 KB. A Focus view button hides surrounding navigation and panels during
+play and restores navigation when returning to the lobby or ending a classic
+shift. Existing reduced-motion preferences and keyboard controls are preserved.
+
 ## Classic sorting game
 
 Choose Nova, Bolt or Pip as your courier before starting. The animated depot
@@ -327,5 +336,3 @@ workshop material. Case-file participants and outcomes are entirely synthetic.
 No student roster, private planning material, company game code, production
 data or credentials are included. Third-party packages retain their own
 licenses. Source is hosted at https://github.com/noahgnentwig-tech/Workshop-Game.
-
-

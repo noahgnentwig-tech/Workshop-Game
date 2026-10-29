@@ -7,9 +7,11 @@
   <title>Parcel Pals | Play</title>
   <link rel="icon" href="/assets/parcel.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/future.css">
+  <script type="module" src="/future.js"></script>
   <script type="module" src="/game.js"></script>
 </head>
-<body>
+<body class="future-theme">
   <a class="skip-link" href="#main">Skip to game</a>
   <header class="site-header">
     <a class="brand" href="/"><img src="/assets/parcel.svg" alt="" width="32" height="32"> Parcel Pals</a>
@@ -29,9 +31,10 @@
     </aside>
     <div id="page-message" class="notice" role="status" aria-live="polite" hidden></div>
     <section class="hero" aria-labelledby="game-title">
-      <p class="eyebrow">Meet your crew. Find your flow.</p>
+      <div class="future-hero-art" aria-hidden="true"><img src="/assets/orbital-depot.webp" alt="" fetchpriority="high"></div>
+      <p class="eyebrow">Orbital delivery network / Classic shift</p>
       <h1 id="game-title">Parcel Pals</h1>
-      <p class="lede">One busy depot. Three destinations. Your next perfect delivery.</p>
+      <p class="lede">The future arrives one parcel at a time. Find your flow in the orbital depot.</p>
       <p id="play-mode" class="muted">Loading your local game...</p>
       <a href="/arena.html" class="button secondary">Play PvP, levels & bosses →</a>
     </section>
@@ -111,6 +114,7 @@
         <p id="feedback" class="feedback" role="status" aria-live="polite">Choose a destination.</p>
         <div id="destinations" class="destinations" aria-label="Delivery destinations"></div>
         <div class="game-actions">
+          <button class="button secondary focus-toggle" type="button" aria-pressed="false">Focus view</button>
           <button id="hint-button" class="button secondary">Ask for a hint</button>
           <span class="hint-stat">Hints: <strong id="hint-count">0</strong></span>
           <button id="end-button" class="button quiet">End this shift</button>

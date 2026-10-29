@@ -5,13 +5,14 @@
   <title>Parcel Pals | Competitive Arena</title>
   <link rel="icon" href="/assets/parcel.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/arena.css">
+  <link rel="stylesheet" href="/future.css"><script type="module" src="/future.js"></script>
   <script type="module" src="/arena.js"></script>
 </head>
-<body class="arena-body">
+<body class="arena-body future-theme">
   <a class="skip-link" href="#arena-main">Skip to arena</a>
   <header class="site-header"><a class="brand" href="/"><img src="/assets/parcel.svg" alt="" width="32" height="32"> Parcel Pals <span class="arena-tag">ARENA</span></a><nav aria-label="Main navigation"><a href="/classic.html">Classic game</a><a href="/arena.html" aria-current="page">Competitive arena</a></nav></header>
   <main id="arena-main" class="arena-layout">
-    <div class="arena-heading"><div><p class="eyebrow">Friendly faces. Fierce competition.</p><h1>The dispatch arena.</h1><p>Climb the levels. Take on the bosses. Challenge a friend.</p></div><div class="player-chip"><span id="player-portrait" aria-hidden="true"></span><div><small>YOUR CALLSIGN</small><strong id="player-name">Connecting…</strong></div></div></div>
+    <div class="arena-heading"><div class="future-hero-art" aria-hidden="true"><img src="/assets/orbital-depot.webp" alt="" fetchpriority="high"></div><div class="arena-hero-copy"><p class="eyebrow">Orbital delivery network / Competitive arena</p><h1>Dispatch<br>the future.</h1><p>Outsort your rivals. Break the boss shields.<br>Take your place in the orbital league.</p><div class="future-feature-tags"><span>220 LEVELS</span><span>LIVE 1 VS 1</span><span>BOSS CHALLENGES</span></div></div><div class="player-chip"><span id="player-portrait" aria-hidden="true"></span><div><small>YOUR CALLSIGN</small><strong id="player-name">Connecting…</strong></div></div></div>
     <p id="arena-message" class="notice" role="status" aria-live="polite" hidden></p>
     <p id="hosting-notice" class="notice" hidden>Free online demo: scores and player records may reset when the host sleeps, restarts or updates. An idle game may take a moment to wake up. Matches share this server.</p>
     <div class="arena-columns">
@@ -36,7 +37,7 @@
           <div id="play-zone"><div class="arena-parcel-row"><div id="arena-parcel" class="arena-parcel"><div id="arena-flags"></div><img id="arena-parcel-icon" src="/assets/leaf.svg" alt="" width="58" height="58"><strong id="arena-parcel-name"></strong><small id="arena-parcel-count"></small></div><div class="arena-up-next"><small>UP NEXT</small><div id="arena-next"></div><button id="arena-wrap" class="button wrap-button" aria-label="Wrap parcel, shortcut W">Wrap <kbd>W</kbd></button><small id="arena-express"></small></div></div>
           <p id="arena-feedback" class="arena-feedback" role="status" aria-live="polite">Find your rhythm. You have got this.</p><div id="arena-destinations" class="destinations"></div><progress id="arena-progress" max="6" value="0" aria-label="Level deliveries"></progress></div>
           <section id="arena-transition" class="arena-transition" hidden><p id="transition-kicker" class="eyebrow"></p><h2 id="transition-title" tabindex="-1"></h2><p id="transition-copy"></p><div class="button-row"><button id="arena-next-level" class="button primary">Next level</button><button id="arena-home" class="button secondary">Back to lobby</button></div></section>
-          <div class="arena-game-footer"><span class="small muted">LEFT <kbd>W</kbd> · RIGHT <kbd>J</kbd><kbd>K</kbd><kbd>L</kbd></span><button id="arena-bank" class="button quiet">Bank score & finish</button></div>
+          <div class="arena-game-footer"><span class="small muted">LEFT <kbd>W</kbd> · RIGHT <kbd>J</kbd><kbd>K</kbd><kbd>L</kbd></span><button class="button secondary focus-toggle" type="button" aria-pressed="false">Focus view</button><button id="arena-bank" class="button quiet">Bank score & finish</button></div>
         </section>
         <section class="panel level-roadmap"><div class="section-heading"><div><p class="eyebrow">The road ahead · 220 levels</p><h2>A bigger climb. A bigger challenge.</h2></div><span id="campaign-progress" class="small muted">0 / 220 levels cleared</span></div><div class="map-navigation"><button id="map-previous" type="button" class="button secondary" aria-label="Previous 20 levels">←</button><label class="sr-only" for="map-range">Browse campaign levels</label><select id="map-range"></select><button id="map-next" type="button" class="button secondary" aria-label="Next 20 levels">→</button></div><div id="level-map" class="level-map" aria-label="Campaign level map"></div><p id="difficulty-copy" class="small muted">Bosses: 10, 30, 50…210. Super bosses: 20, 40, 60…220. Browse the full map; unlock each level by playing. Difficulty builds gradually, with a limit on speed and parcel counts to keep later levels playable.</p></section>
       </div>

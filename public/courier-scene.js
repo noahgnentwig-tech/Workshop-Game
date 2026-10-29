@@ -1,8 +1,8 @@
 // Decorative animation only: the server remains responsible for every game rule.
 export const CREW = {
-  nova: { name: 'Nova', color: '#28bba6', dark: '#137665', accent: '#a9fff0' },
-  bolt: { name: 'Bolt', color: '#ffae53', dark: '#b36527', accent: '#fff1aa' },
-  pip: { name: 'Pip', color: '#a292ef', dark: '#6658a5', accent: '#ece2ff' }
+  nova: { name: 'Nova', color: '#abd6e3', dark: '#356479', accent: '#72edfa' },
+  bolt: { name: 'Bolt', color: '#edc16d', dark: '#90652f', accent: '#fff0b2' },
+  pip: { name: 'Pip', color: '#7bafd2', dark: '#36577c', accent: '#b5f2ff' }
 };
 
 export function crewPortrait(id) {
@@ -14,7 +14,7 @@ export function crewPortrait(id) {
 export function createCourierScene(canvas) {
   const ctx = canvas.getContext('2d');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const colors = ['#56bda0', '#aa95e8', '#f6b555'];
+  const colors = ['#68e4d1', '#69ccef', '#f9cc72'];
   let crew = 'nova';
   let round = null;
   let destinations = [];
@@ -27,6 +27,9 @@ export function createCourierScene(canvas) {
   let raf;
   let sound = false;
   let audio;
+  const sceneArt = new Image();
+  sceneArt.addEventListener('load', wake);
+  sceneArt.src = '/assets/orbital-depot.webp';
 
   function box(x, y, w, h, r, fill, stroke) {
     ctx.beginPath();
@@ -112,8 +115,11 @@ export function createCourierScene(canvas) {
     ctx.setTransform(canvas.width / 900, 0, 0, canvas.height / 250, 0, 0);
     ctx.clearRect(0, 0, 900, 250);
     const gradient = ctx.createLinearGradient(0, 0, 0, 250);
-    gradient.addColorStop(0, '#183c45'); gradient.addColorStop(1, '#102c37');
+    gradient.addColorStop(0, '#11283c'); gradient.addColorStop(1, '#0b192a');
     ctx.fillStyle = gradient; ctx.fillRect(0, 0, 900, 250);
+    if (sceneArt.complete && sceneArt.naturalWidth) {
+      ctx.globalAlpha = .18; ctx.drawImage(sceneArt, 0, 0, 900, 250); ctx.globalAlpha = 1;
+    }
     // Quiet architectural details, conveyor, and three visually distinct loading bays.
     for (let x = -100; x < 1000; x += 75) line(x, 250, x + 120, 73, '#23434d', 1);
     for (const y of [94, 125, 166, 218]) line(0, y, 900, y, '#23434d', 1);

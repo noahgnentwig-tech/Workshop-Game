@@ -2,6 +2,11 @@
 
 A game representing how I direct AI in gaming.
 
+**Play online:** https://parcel-pals-arena.onrender.com
+
+The free demo can take a moment to wake up. Scores may reset when it sleeps,
+restarts or updates. Share this same address with a friend for live PvP.
+
 A small, original HTML game for a cross-functional student workshop. Improve the
 game, explore fictional experiment data, and propose a test of your own.
 
@@ -321,5 +326,6 @@ The game concept, code, styling and SVG artwork in this starter are original
 workshop material. Case-file participants and outcomes are entirely synthetic.
 No student roster, private planning material, company game code, production
 data or credentials are included. Third-party packages retain their own
-licenses. No remote repository is configured by this project.
+licenses. Source is hosted at https://github.com/noahgnentwig-tech/Workshop-Game.
+
 

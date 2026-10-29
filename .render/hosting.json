@@ -1,0 +1,12 @@
+{
+  "serviceId": "srv-dbhiggvlk1mc73crqq0g",
+  "workspaceId": "tea-dbhi8dm1egvs73fkv2eg",
+  "name": "parcel-pals-arena",
+  "url": "https://parcel-pals-arena.onrender.com",
+  "dashboardUrl": "https://dashboard.render.com/web/srv-dbhiggvlk1mc73crqq0g",
+  "repository": "https://github.com/noahgnentwig-tech/Workshop-Game",
+  "branch": "main",
+  "plan": "free",
+  "region": "frankfurt",
+  "management": "Render connector; render.yaml is an optional Blueprint template, not the active manager"
+}
